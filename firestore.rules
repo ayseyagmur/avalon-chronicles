@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Blogs collection: read by anyone, write only by the verified admin user
+    match /blogs/{document} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'admin@ayseyagmur.com';
+    }
+
+    // Settings collection: write only by the verified admin user
+    match /settings/{document} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email == 'admin@ayseyagmur.com';
+    }
+  }
+}

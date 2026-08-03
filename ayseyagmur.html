@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Avalon Chronicles</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+body{margin:0;padding:24px;background:#EFE1C0;display:flex;justify-content:center}
+.mv-page-frame{max-width:760px;width:100%}
+.mv-wrap{position:relative;--parchment:#EFE1C0;--ink:#2B2118;--ink-soft:#5B4A34;--rubric:#7A1F2B;--gold:#9C7A2E;--border-brown:#8B7355;--line:rgba(43,33,24,.18);--line-strong:rgba(43,33,24,.38);--panel-bg:rgba(239,225,192,0.55);
+font-family:"EB Garamond",Georgia,serif;background:var(--parchment);color:var(--ink);border-radius:8px;overflow:hidden;font-size:16px;line-height:1.6}
+.mv-wrap::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cg fill='none' stroke='%232B2118' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M10,40 C40,30 55,10 70,-5'/%3E%3Cpath d='M28,32 C34,20 30,8 36,-2'/%3E%3Cpath d='M42,26 C50,18 48,6 56,0'/%3E%3Cellipse cx='34' cy='19' rx='7' ry='3.2' transform='rotate(-35 34 19)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='50' cy='12' rx='6' ry='2.8' transform='rotate(-25 50 12)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='20' cy='30' rx='6' ry='2.6' transform='rotate(-50 20 30)' fill='%232B2118' opacity='0.85'/%3E%3Cpath d='M300,120 C280,140 275,165 285,190'/%3E%3Cpath d='M288,132 C282,142 286,152 280,160'/%3E%3Cellipse cx='284' cy='140' rx='6.5' ry='3' transform='rotate(60 284 140)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='278' cy='158' rx='6' ry='2.7' transform='rotate(70 278 158)' fill='%232B2118' opacity='0.85'/%3E%3Cpath d='M150,300 C160,280 158,262 170,248'/%3E%3Cellipse cx='163' cy='274' rx='6' ry='2.8' transform='rotate(-40 163 274)' fill='%232B2118' opacity='0.8'/%3E%3Cellipse cx='172' cy='256' rx='5.5' ry='2.5' transform='rotate(-30 172 256)' fill='%232B2118' opacity='0.8'/%3E%3Cpath d='M0,250 C15,240 22,225 18,208'/%3E%3Cellipse cx='12' cy='230' rx='5.5' ry='2.5' transform='rotate(20 12 230)' fill='%232B2118' opacity='0.8'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat;background-size:200px 200px;opacity:0.18;pointer-events:none}
+.mv-header,.mv-body-wrap{position:relative;z-index:1}
+.mv-header{z-index:5}
+.mv-header{border-bottom:3px double var(--border-brown);padding:18px 24px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.mv-brand{font-family:"Pinyon Script",cursive;font-weight:400;font-size:2.3rem;letter-spacing:.01em;color:var(--ink);display:flex;align-items:center;gap:6px;text-decoration:none}
+.mv-candle-icon{width:32px;height:auto;flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.15));transform:rotate(240deg)}
+.mv-brand span{color:var(--rubric)}
+.mv-brand span.mv-avalon-word{position:relative;cursor:pointer;display:inline-block;color:#000}
+.mv-brand,.mv-brand:visited,.mv-brand:focus,.mv-brand:active{background:transparent;outline:none;-webkit-tap-highlight-color:transparent}
+.mv-nav{display:flex;gap:20px;font-family:"Cinzel",serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.mv-nav a{color:var(--ink-soft);text-decoration:none}
+.mv-nav a:hover{color:var(--rubric)}
+.mv-body-wrap{padding:36px 24px 48px;min-height:400px}
+
+/* ── Login ── */
+.mv-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:360px;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.mv-login-card{text-align:center;max-width:340px;width:100%;border:2px solid var(--border-brown);padding:40px 32px;position:relative;background:var(--panel-bg)}
+.mv-login-card::before,.mv-login-card::after{content:"❧";position:absolute;font-size:1.2rem;color:var(--gold);opacity:.6}
+.mv-login-card::before{top:10px;left:14px}
+.mv-login-card::after{bottom:10px;right:14px;transform:rotate(180deg)}
+.mv-login-icon{font-size:2.4rem;margin-bottom:8px;display:block}
+.mv-login-title{font-family:"Cinzel",serif;font-weight:600;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rubric);margin:0 0 6px}
+.mv-login-sub{color:var(--ink-soft);font-size:.88rem;font-style:italic;margin:0 0 24px}
+.mv-login-input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.35);border:1px solid var(--border-brown);padding:12px 16px;font-family:"EB Garamond",serif;font-size:1rem;color:var(--ink);text-align:center;letter-spacing:.1em;border-radius:4px;outline:none;transition:border-color .2s}
+.mv-login-input:focus{border-color:var(--rubric)}
+.mv-login-input::placeholder{color:var(--ink-soft);opacity:.55;font-style:italic}
+.mv-login-btn{display:block;width:100%;margin-top:16px;padding:12px;background:var(--rubric);color:var(--parchment);border:none;font-family:"Cinzel",serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s,transform .1s}
+.mv-login-btn:hover{background:#9a2f3b}
+.mv-login-btn:active{transform:scale(.97)}
+.mv-login-error{color:#a33;font-size:.82rem;margin:14px 0 0;min-height:1.2em;font-style:italic}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.mv-shake{animation:shake .4s ease}
+
+/* ── Dashboard ── */
+.mv-dash{animation:fadeUp .4s ease}
+.mv-dash-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line-strong)}
+.mv-dash-title{font-family:"Cinzel",serif;font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rubric);margin:0}
+.mv-dash-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mv-btn{padding:8px 16px;border:1px solid var(--border-brown);background:none;font-family:"Cinzel",serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;border-radius:4px;transition:all .2s}
+.mv-btn:hover{background:var(--line);color:var(--ink)}
+.mv-btn-primary{background:var(--rubric);color:var(--parchment);border-color:var(--rubric)}
+.mv-btn-primary:hover{background:#9a2f3b;color:#fff}
+.mv-btn-danger{color:#a33;border-color:#c44}
+.mv-btn-danger:hover{background:#a33;color:#fff}
+.mv-btn-small{padding:5px 10px;font-size:.52rem}
+
+/* Blog list */
+.mv-blog-list{display:flex;flex-direction:column}
+.mv-blog-item{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.mv-blog-item:last-child{border-bottom:none}
+.mv-blog-info{flex:1;min-width:0}
+.mv-blog-item-title{font-family:"EB Garamond",serif;font-weight:600;font-style:italic;font-size:1.05rem;margin:0 0 4px;color:var(--ink)}
+.mv-blog-item-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mv-blog-item-date{font-family:"Cinzel",serif;font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.mv-blog-item-badge{display:inline-block;font-family:"Cinzel",serif;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.mv-badge-kind{color:var(--rubric);border:1px solid var(--rubric)}
+.mv-badge-lang{color:var(--ink-soft);border:1px solid var(--border-brown)}
+.mv-blog-item-actions{display:flex;gap:6px;flex-shrink:0;padding-top:4px}
+.mv-empty{text-align:center;padding:48px 0;color:var(--ink-soft);font-style:italic}
+
+/* ── Dialogs ── */
+dialog{border:2px solid var(--border-brown);border-radius:8px;background:var(--parchment);color:var(--ink);font-family:"EB Garamond",Georgia,serif;padding:0;max-width:560px;width:calc(100% - 48px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(43,33,24,.55);backdrop-filter:blur(3px)}
+.mv-dialog-head{padding:20px 24px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.mv-dialog-title{font-family:"Cinzel",serif;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rubric);margin:0}
+.mv-dialog-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink-soft);padding:0;line-height:1}
+.mv-dialog-close:hover{color:var(--rubric)}
+.mv-dialog-body{padding:20px 24px 24px}
+.mv-form-group{margin-bottom:16px}
+.mv-form-group label{display:block;font-family:"Cinzel",serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mv-form-group input,.mv-form-group textarea,.mv-form-group select{width:100%;box-sizing:border-box;background:rgba(255,255,255,.35);border:1px solid var(--border-brown);padding:10px 12px;font-family:"EB Garamond",serif;font-size:.95rem;color:var(--ink);border-radius:4px;outline:none;transition:border-color .2s}
+.mv-form-group input:focus,.mv-form-group textarea:focus,.mv-form-group select:focus{border-color:var(--rubric)}
+.mv-form-group textarea{min-height:160px;resize:vertical;line-height:1.6}
+.mv-form-group select{cursor:pointer}
+.mv-form-row{display:flex;gap:12px}
+.mv-form-row .mv-form-group{flex:1}
+.mv-dialog-footer{display:flex;justify-content:flex-end;gap:10px;padding-top:8px}
+.mv-dialog-msg{font-size:.82rem;font-style:italic;margin:8px 0 0;min-height:1.2em}
+.mv-dialog-msg.err{color:#a33}
+.mv-dialog-msg.ok{color:#2a6e3f}
+
+/* Delete confirm */
+.mv-confirm-text{font-size:1rem;margin:0 0 8px}
+.mv-confirm-title{font-weight:600;color:var(--rubric)}
+
+/* Toast */
+.mv-toast-wrap{position:fixed;top:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.mv-toast{padding:12px 20px;border-radius:6px;font-family:"EB Garamond",serif;font-size:.9rem;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.25);animation:toastIn .3s ease;max-width:320px}
+.mv-toast.ok{background:#2a6e3f}
+.mv-toast.err{background:#a33}
+@keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+
+/* Loading */
+.mv-loading{text-align:center;padding:32px;color:var(--ink-soft);font-style:italic}
+.mv-spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--rubric);border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="mv-page-frame">
+<div class="mv-wrap">
+  <div class="mv-header">
+    <a class="mv-brand" href="index.html">
+      <img class="mv-candle-icon" src="data:image/png;base64,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" alt="">
+      <span class="mv-avalon-word">Avalon</span> <span>Chronicles</span>
+    </a>
+    <div class="mv-nav"><a href="index.html">Home</a><a href="blogs.html">Blogs</a><a href="about.html">About Me</a></div>
+  </div>
+
+  <div class="mv-body-wrap">
+    <!-- Login Section -->
+    <section id="loginSection" class="mv-login">
+      <div class="mv-login-card">
+        <span class="mv-login-icon">⚔️</span>
+        <h1 class="mv-login-title">The Keeper's Gate</h1>
+        <p class="mv-login-sub">Enter the passphrase to access the chronicles.</p>
+        <form id="loginForm" autocomplete="off">
+          <input type="password" id="passwordInput" class="mv-login-input" placeholder="Passphrase…" required autofocus>
+          <button type="submit" class="mv-login-btn">Enter the Gate</button>
+        </form>
+        <p id="loginError" class="mv-login-error"></p>
+      </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboardSection" class="mv-dash" style="display:none">
+      <div class="mv-dash-bar">
+        <h1 class="mv-dash-title">📜 Chronicle Archives</h1>
+        <div class="mv-dash-actions">
+          <button type="button" class="mv-btn mv-btn-primary" onclick="openBlogForm()">+ New Entry</button>
+          <button type="button" class="mv-btn" onclick="openPasswordDialog()">🔑 Passphrase</button>
+          <button type="button" class="mv-btn mv-btn-danger" onclick="logout()">Leave</button>
+        </div>
+      </div>
+      <div id="blogList"></div>
+    </section>
+  </div>
+</div>
+</div>
+
+<!-- Blog Form Dialog -->
+<dialog id="blogDialog">
+  <div class="mv-dialog-head">
+    <h2 class="mv-dialog-title" id="blogDialogTitle">New Entry</h2>
+    <button type="button" class="mv-dialog-close" onclick="closeBlogDialog()">×</button>
+  </div>
+  <div class="mv-dialog-body">
+    <form id="blogForm" onsubmit="return saveBlog(event)">
+      <input type="hidden" id="blogId">
+      <div class="mv-form-group">
+        <label for="blogTitle">Title</label>
+        <input type="text" id="blogTitle" required>
+      </div>
+      <div class="mv-form-group">
+        <label for="blogExcerpt">Excerpt</label>
+        <input type="text" id="blogExcerpt" required>
+      </div>
+      <div class="mv-form-row">
+        <div class="mv-form-group">
+          <label for="blogDate">Date (DD/MM/YYYY)</label>
+          <input type="text" id="blogDate" placeholder="20/07/2026" required>
+        </div>
+        <div class="mv-form-group">
+          <label for="blogSlug">Slug</label>
+          <input type="text" id="blogSlug" placeholder="blog-title" required>
+        </div>
+      </div>
+      <div class="mv-form-row">
+        <div class="mv-form-group">
+          <label for="blogKind">Kind</label>
+          <select id="blogKind">
+            <option value="essay">Essay</option>
+            <option value="review">Review</option>
+            <option value="poetry">Poetry</option>
+          </select>
+        </div>
+        <div class="mv-form-group">
+          <label for="blogLang">Language</label>
+          <select id="blogLang">
+            <option value="tr">Türkçe</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+      <div class="mv-form-group">
+        <label for="blogContent">Content (paragraphs separated by blank lines)</label>
+        <textarea id="blogContent" required></textarea>
+      </div>
+      <div class="mv-form-group">
+        <label for="blogSign">Sign / Closing Line</label>
+        <input type="text" id="blogSign" placeholder="— a quiet evening thought">
+      </div>
+      <div class="mv-dialog-footer">
+        <button type="button" class="mv-btn" onclick="closeBlogDialog()">Cancel</button>
+        <button type="submit" class="mv-btn mv-btn-primary" id="blogSaveBtn">Save Entry</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Delete Confirmation Dialog -->
+<dialog id="deleteDialog">
+  <div class="mv-dialog-head">
+    <h2 class="mv-dialog-title">Confirm Deletion</h2>
+    <button type="button" class="mv-dialog-close" onclick="closeDeleteDialog()">×</button>
+  </div>
+  <div class="mv-dialog-body">
+    <p class="mv-confirm-text">Are you sure you want to delete <strong class="mv-confirm-title" id="deleteTitle"></strong>?</p>
+    <p style="color:var(--ink-soft);font-size:.85rem;font-style:italic">This action cannot be undone.</p>
+    <input type="hidden" id="deleteId">
+    <div class="mv-dialog-footer" style="margin-top:16px">
+      <button type="button" class="mv-btn" onclick="closeDeleteDialog()">Cancel</button>
+      <button type="button" class="mv-btn mv-btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Password Change Dialog -->
+<dialog id="passwordDialog">
+  <div class="mv-dialog-head">
+    <h2 class="mv-dialog-title">Change Passphrase</h2>
+    <button type="button" class="mv-dialog-close" onclick="closePasswordDialog()">×</button>
+  </div>
+  <div class="mv-dialog-body">
+    <form id="passwordForm" onsubmit="return changePassword(event)">
+      <div class="mv-form-group">
+        <label for="newPassword">New Passphrase</label>
+        <input type="password" id="newPassword" required>
+      </div>
+      <div class="mv-form-group">
+        <label for="confirmPassword">Confirm New Passphrase</label>
+        <input type="password" id="confirmPassword" required>
+      </div>
+      <p id="passwordMsg" class="mv-dialog-msg"></p>
+      <div class="mv-dialog-footer">
+        <button type="button" class="mv-btn" onclick="closePasswordDialog()">Cancel</button>
+        <button type="submit" class="mv-btn mv-btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Toast container -->
+<div class="mv-toast-wrap" id="toastWrap"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var ADMIN_EMAIL = 'admin@ayseyagmur.com';
+
+  // ── Firebase Config ──
+  var firebaseConfig = {
+    apiKey: "AIzaSyCRcKI8WNSvo_v1Em7p93FwV8vATMQUIBI",
+    authDomain: "aysesite2.firebaseapp.com",
+    projectId: "aysesite2",
+    storageBucket: "aysesite2.firebasestorage.app",
+    messagingSenderId: "254142189527",
+    appId: "1:254142189527:web:98397320ede7cb52b84592"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+  var auth = firebase.auth();
+
+  // ── Session Config ──
+  var SESSION_KEY = 'av_admin_session';
+  var SESSION_MS = 10 * 60 * 1000; // 10 minutes
+  var sessionTimer = null;
+
+  // ── Toast Notification ──
+  function toast(msg, type) {
+    var el = document.createElement('div');
+    el.className = 'mv-toast ' + (type || 'ok');
+    el.textContent = msg;
+    document.getElementById('toastWrap').appendChild(el);
+    setTimeout(function() { el.remove(); }, 3500);
+  }
+
+  // ── Session Management ──
+  function startSession() {
+    sessionStorage.setItem(SESSION_KEY, Date.now().toString());
+    startSessionTimer();
+  }
+
+  function checkSession() {
+    var ts = sessionStorage.getItem(SESSION_KEY);
+    if (!ts) return false;
+    return (Date.now() - parseInt(ts)) < SESSION_MS;
+  }
+
+  function startSessionTimer() {
+    clearInterval(sessionTimer);
+    sessionTimer = setInterval(function() {
+      if (!checkSession()) {
+        logout();
+        toast('Oturum süresi doldu. Tekrar giriş yapın.', 'err');
+      }
+    }, 5000);
+  }
+
+  function showLogin() {
+    document.getElementById('loginSection').style.display = '';
+    document.getElementById('dashboardSection').style.display = 'none';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('loginError').textContent = '';
+  }
+
+  function showDashboard() {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('dashboardSection').style.display = '';
+    loadBlogs();
+  }
+
+  // ── Login ──
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var pw = document.getElementById('passwordInput').value.trim();
+    var errEl = document.getElementById('loginError');
+    if (!pw) return;
+
+    try {
+      await auth.signInWithEmailAndPassword(ADMIN_EMAIL, pw);
+      startSession();
+      showDashboard();
+      toast('Hoş geldiniz! 🏰');
+    } catch (err) {
+      errEl.textContent = 'Wrong passphrase. The gate remains sealed.';
+      document.querySelector('.mv-login-card').classList.add('mv-shake');
+      setTimeout(function() { document.querySelector('.mv-login-card').classList.remove('mv-shake'); }, 500);
+    }
+  });
+
+  // ── Logout ──
+  window.logout = function() {
+    sessionStorage.removeItem(SESSION_KEY);
+    clearInterval(sessionTimer);
+    auth.signOut();
+    showLogin();
+  };
+
+  // ── On Page Load: Check Auth State & Session ──
+  auth.onAuthStateChanged(function(user) {
+    if (user && user.email === ADMIN_EMAIL && checkSession()) {
+      showDashboard();
+      startSessionTimer();
+    } else {
+      showLogin();
+    }
+  });
+
+  // ── Load Blogs ──
+  async function loadBlogs() {
+    var listEl = document.getElementById('blogList');
+    listEl.innerHTML = '<div class="mv-loading"><span class="mv-spinner"></span>Loading chronicles…</div>';
+
+    try {
+      var snapshot = await db.collection('blogs').orderBy('createdAt', 'desc').get();
+      if (snapshot.empty) {
+        listEl.innerHTML = '<div class="mv-empty">No entries yet. Add your first chronicle.</div>';
+        return;
+      }
+      var html = '<div class="mv-blog-list">';
+      snapshot.forEach(function(doc) {
+        var d = doc.data();
+        html += '<div class="mv-blog-item">';
+        html += '<div class="mv-blog-info">';
+        html += '<h3 class="mv-blog-item-title">' + escHtml(d.title) + '</h3>';
+        html += '<div class="mv-blog-item-meta">';
+        html += '<span class="mv-blog-item-date">' + escHtml(d.date) + '</span>';
+        html += '<span class="mv-blog-item-badge mv-badge-kind">' + escHtml(d.kind) + '</span>';
+        html += '<span class="mv-blog-item-badge mv-badge-lang">' + escHtml(d.lang).toUpperCase() + '</span>';
+        html += '</div></div>';
+        html += '<div class="mv-blog-item-actions">';
+        html += '<button type="button" class="mv-btn mv-btn-small" onclick="editBlog(\'' + doc.id + '\')">Edit</button>';
+        html += '<button type="button" class="mv-btn mv-btn-small mv-btn-danger" onclick="openDeleteDialog(\'' + doc.id + '\',\'' + escAttr(d.title) + '\')">Delete</button>';
+        html += '</div></div>';
+      });
+      html += '</div>';
+      listEl.innerHTML = html;
+    } catch (err) {
+      listEl.innerHTML = '<div class="mv-empty" style="color:#a33">Error loading blogs: ' + escHtml(err.message) + '</div>';
+    }
+  }
+
+  // ── Blog Form ──
+  window.openBlogForm = function() {
+    document.getElementById('blogDialogTitle').textContent = 'New Entry';
+    document.getElementById('blogSaveBtn').textContent = 'Save Entry';
+    document.getElementById('blogForm').reset();
+    document.getElementById('blogId').value = '';
+    // Set today's date
+    var now = new Date();
+    document.getElementById('blogDate').value = pad(now.getDate()) + '/' + pad(now.getMonth() + 1) + '/' + now.getFullYear();
+    document.getElementById('blogDialog').showModal();
+  };
+
+  window.editBlog = async function(id) {
+    document.getElementById('blogDialogTitle').textContent = 'Edit Entry';
+    document.getElementById('blogSaveBtn').textContent = 'Update Entry';
+    try {
+      var doc = await db.collection('blogs').doc(id).get();
+      if (!doc.exists) { toast('Blog not found', 'err'); return; }
+      var d = doc.data();
+      document.getElementById('blogId').value = id;
+      document.getElementById('blogTitle').value = d.title || '';
+      document.getElementById('blogExcerpt').value = d.excerpt || '';
+      document.getElementById('blogDate').value = d.date || '';
+      document.getElementById('blogSlug').value = d.slug || '';
+      document.getElementById('blogKind').value = d.kind || 'essay';
+      document.getElementById('blogLang').value = d.lang || 'tr';
+      document.getElementById('blogContent').value = d.content || '';
+      document.getElementById('blogSign').value = d.sign || '';
+      document.getElementById('blogDialog').showModal();
+    } catch (err) {
+      toast('Error: ' + err.message, 'err');
+    }
+  };
+
+  window.closeBlogDialog = function() {
+    document.getElementById('blogDialog').close();
+  };
+
+  window.saveBlog = async function(e) {
+    e.preventDefault();
+    var id = document.getElementById('blogId').value;
+    var data = {
+      title: document.getElementById('blogTitle').value.trim(),
+      excerpt: document.getElementById('blogExcerpt').value.trim(),
+      date: document.getElementById('blogDate').value.trim(),
+      slug: document.getElementById('blogSlug').value.trim(),
+      kind: document.getElementById('blogKind').value,
+      lang: document.getElementById('blogLang').value,
+      content: document.getElementById('blogContent').value.trim(),
+      sign: document.getElementById('blogSign').value.trim()
+    };
+
+    try {
+      if (id) {
+        data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+        await db.collection('blogs').doc(id).update(data);
+        toast('Entry updated ✓');
+      } else {
+        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        await db.collection('blogs').add(data);
+        toast('Entry created ✓');
+      }
+      closeBlogDialog();
+      loadBlogs();
+    } catch (err) {
+      toast('Error: ' + err.message, 'err');
+    }
+    return false;
+  };
+
+  // Auto-generate slug from title
+  document.getElementById('blogTitle').addEventListener('input', function() {
+    var slugEl = document.getElementById('blogSlug');
+    if (!document.getElementById('blogId').value) {
+      slugEl.value = 'blog-' + this.value.toLowerCase()
+        .replace(/[ğ]/g, 'g').replace(/[ü]/g, 'u').replace(/[ş]/g, 's')
+        .replace(/[ı]/g, 'i').replace(/[ö]/g, 'o').replace(/[ç]/g, 'c')
+        .replace(/[â]/g, 'a').replace(/[î]/g, 'i').replace(/[û]/g, 'u')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+  });
+
+  // ── Delete Blog ──
+  window.openDeleteDialog = function(id, title) {
+    document.getElementById('deleteId').value = id;
+    document.getElementById('deleteTitle').textContent = title;
+    document.getElementById('deleteDialog').showModal();
+  };
+
+  window.closeDeleteDialog = function() {
+    document.getElementById('deleteDialog').close();
+  };
+
+  window.confirmDelete = async function() {
+    var id = document.getElementById('deleteId').value;
+    try {
+      await db.collection('blogs').doc(id).delete();
+      toast('Entry deleted');
+      closeDeleteDialog();
+      loadBlogs();
+    } catch (err) {
+      toast('Error: ' + err.message, 'err');
+    }
+  };
+
+  // ── Password Change ──
+  window.openPasswordDialog = function() {
+    document.getElementById('passwordForm').reset();
+    document.getElementById('passwordMsg').textContent = '';
+    document.getElementById('passwordMsg').className = 'mv-dialog-msg';
+    document.getElementById('passwordDialog').showModal();
+  };
+
+  window.closePasswordDialog = function() {
+    document.getElementById('passwordDialog').close();
+  };
+
+  window.changePassword = async function(e) {
+    e.preventDefault();
+    var msgEl = document.getElementById('passwordMsg');
+    var newPw = document.getElementById('newPassword').value.trim();
+    var confirmPw = document.getElementById('confirmPassword').value.trim();
+
+    if (newPw !== confirmPw) {
+      msgEl.textContent = 'New passphrases do not match.';
+      msgEl.className = 'mv-dialog-msg err';
+      return false;
+    }
+    if (newPw.length < 6) {
+      msgEl.textContent = 'Passphrase must be at least 6 characters.';
+      msgEl.className = 'mv-dialog-msg err';
+      return false;
+    }
+
+    try {
+      var user = auth.currentUser;
+      if (!user) {
+        msgEl.textContent = 'Session expired. Please log in again.';
+        msgEl.className = 'mv-dialog-msg err';
+        return false;
+      }
+      await user.updatePassword(newPw);
+      msgEl.textContent = 'Passphrase updated successfully!';
+      msgEl.className = 'mv-dialog-msg ok';
+      setTimeout(closePasswordDialog, 1500);
+      toast('Passphrase changed ✓');
+    } catch (err) {
+      if (err.code === 'auth/requires-recent-login') {
+        msgEl.textContent = 'Please log out and log in again before changing passphrase.';
+      } else {
+        msgEl.textContent = 'Error: ' + err.message;
+      }
+      msgEl.className = 'mv-dialog-msg err';
+    }
+    return false;
+  };
+
+  // ── Helpers ──
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+  function escAttr(s) {
+    return (s || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
+  }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalon Chronicles — Seed Data</title>
+<style>
+body{font-family:system-ui;max-width:600px;margin:40px auto;padding:20px;background:#1a1a2e;color:#e0e0e0}
+h1{color:#9C7A2E}
+.status{padding:12px;margin:8px 0;border-radius:6px;font-size:14px}
+.ok{background:#1b4332;color:#95d5b2}
+.err{background:#3d0000;color:#ff8a8a}
+.pending{background:#2d2d44;color:#b8b8d0}
+button{background:#7A1F2B;color:#EFE1C0;border:none;padding:12px 24px;font-size:16px;border-radius:6px;cursor:pointer;margin-top:20px}
+button:hover{background:#9a2f3b}
+button:disabled{opacity:.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+<h1>🏰 Avalon Chronicles — Seed Data</h1>
+<p>Bu sayfa Firestore'a ilk verileri ekler. Sadece bir kez çalıştırın.</p>
+<p><strong>Gereksinimler:</strong></p>
+<ul>
+<li>Firestore Database oluşturulmuş olmalı</li>
+<li>Authentication → Anonymous sign-in aktif olmalı</li>
+<li>Firestore test mode'da olmalı VEYA security rules ayarlanmış olmalı</li>
+</ul>
+<button id="seedBtn" onclick="seedAll()">Verileri Yükle</button>
+<div id="log"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCRcKI8WNSvo_v1Em7p93FwV8vATMQUIBI",
+  authDomain: "aysesite2.firebaseapp.com",
+  projectId: "aysesite2",
+  storageBucket: "aysesite2.firebasestorage.app",
+  messagingSenderId: "254142189527",
+  appId: "1:254142189527:web:98397320ede7cb52b84592",
+  measurementId: "G-CYQ81TCBLD"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+var auth = firebase.auth();
+var logEl = document.getElementById('log');
+
+function log(msg, type) {
+  var d = document.createElement('div');
+  d.className = 'status ' + type;
+  d.textContent = msg;
+  logEl.appendChild(d);
+}
+
+async function seedAll() {
+  var btn = document.getElementById('seedBtn');
+  btn.disabled = true;
+
+  // 1. Sign in with Email/Password
+  log('Admin Auth (admin@ayseyagmur.com) ile giriş yapılıyor...', 'pending');
+  try {
+    await auth.signInWithEmailAndPassword('admin@ayseyagmur.com', '2027');
+    log('✓ Admin Auth başarılı', 'ok');
+  } catch (e) {
+    log('✗ Admin Auth hatası: ' + e.message + ' (Firebase Console\'da admin@ayseyagmur.com kullanıcısını oluşturdunuz mu?)', 'err');
+    btn.disabled = false;
+    return;
+  }
+
+  // 3. Blog 1 - Sessizlik
+  log('Blog 1 (Sessizlik) ekleniyor...', 'pending');
+  try {
+    await db.collection('blogs').add({
+      title: 'Sinemada Sessizliğin Ağırlığı Üzerine',
+      excerpt: 'Bir sahnede sesi kestiğimizde, aslında ne kadar çok şeyin hâlâ konuştuğu üzerine.',
+      content: 'Bir filmde en çok neyin konuştuğunu fark etmek için bazen sesi tamamen kesmek gerekir. Müzik olmadığında, diyalog olmadığında, sahnenin geri kalanı aniden çok daha yüksek sesle konuşmaya başlar: bir yüzün kasılışı, bir elin masaya değişi, kameranın bir saniye fazla beklemesi. Sessizlik boşluk değildir; yönetmenin en kasıtlı seçimidir.\n\nBunu en çok fark ettiğim yapımlar, genellikle izleyiciyi rahatsız etmekten çekinmeyenler oluyor. Bir sahnenin "bitmesi gereken" yerden birkaç saniye sonra hâlâ orada durmak, izleyiciye normalde atlanan bir şeyi düşünme payı bırakıyor. Modern kurgu bu payı gittikçe azaltıyor; her şey daha hızlı kesiliyor, her duraklama bir "hata" gibi hissettiriliyor. Oysa bazı duygular sadece süre içinde ortaya çıkar.\n\nSessizliğin bir de teknik tarafı var elbette: ortam sesi, nefes, kumaşın hışırtısı gibi çok küçük detaylar aslında sahneyi dolduruyor. Yani "sessiz" dediğimiz an aslında çok az konuşan, ama çok fazla dinleyen bir andır. Belki de bu yüzden ikinci izleyişte bambaşka bir film gibi hissettiriyor bazı sahneler; ilk seferde diyaloğu takip ederken, ikincisinde nihayet arka planı duyabiliyoruz.',
+      sign: '— bir sahneyi üçüncü kez izlerken, sesi kısıp sadece yüzleri izlediğim bir akşamdan sonra',
+      date: '20/07/2026',
+      kind: 'essay',
+      lang: 'tr',
+      slug: 'blog-sessizlik',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    log('✓ Blog 1 (Sessizlik) eklendi', 'ok');
+  } catch (e) {
+    log('✗ Blog 1 eklenemedi: ' + e.message, 'err');
+  }
+
+  // 4. Blog 2 - Stalker
+  log('Blog 2 (Stalker) ekleniyor...', 'pending');
+  try {
+    await db.collection('blogs').add({
+      title: 'Stalker and the Room That Won\'t Explain Itself',
+      excerpt: 'Tarkovsky builds a landscape that resists interpretation on purpose.',
+      content: 'There is a scene early in Stalker where the three men simply sit in a handcar, rattling toward the Zone, and Tarkovsky holds the shot so long that you stop watching it as travel and start watching it as duration itself. Nothing is explained. Nothing needs to be. The film has already told you, in its pacing alone, that this is not a place that rewards impatience.\n\nThe Zone works because it refuses to cash out its own metaphor. Is it alien technology, a punishment, a mirror, a wish-granting machine that only grants what you actually want, which is worse than what you asked for? The film gestures at all of these and commits to none, and that refusal is the point. A lesser version of this story would explain the Room by the end. Tarkovsky understands that an explained Room is a smaller Room.\n\nWhat stays with me is how physical the ambiguity is. The wetness of the tunnels, the dog that appears without comment, the wind moving grass in a room with no visible source of wind — all of it insists that whatever is happening here is real on its own terms, even if those terms are never translated into ours. It\'s the opposite of most "mystery box" storytelling, which promises a key. Stalker never promises a key. It promises weather.\n\nI keep returning to it less as a puzzle and more as a mood I want to sit inside again, the way you\'d return to a piece of music rather than a plot. That, I think, is what makes it endure past its own decade: it was never trying to be solved.',
+      sign: '— written after a very late rewatch, the kind where you notice the silences more than the words',
+      date: '14/07/2026',
+      kind: 'review',
+      lang: 'en',
+      slug: 'blog-stalker',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    log('✓ Blog 2 (Stalker) eklendi', 'ok');
+  } catch (e) {
+    log('✗ Blog 2 eklenemedi: ' + e.message, 'err');
+  }
+
+  log('🏁 Tüm işlemler tamamlandı!', 'ok');
+  btn.textContent = 'Tamamlandı ✓';
+}
+</script>
+</body>
+</html>

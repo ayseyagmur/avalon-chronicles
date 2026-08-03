@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading… — Avalon Chronicles</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+body{margin:0;padding:24px;background:#EFE1C0;display:flex;justify-content:center}
+.mv-page-frame{max-width:760px;width:100%}
+.mv-wrap{position:relative;--parchment:#EFE1C0;--ink:#2B2118;--ink-soft:#5B4A34;--rubric:#7A1F2B;--gold:#9C7A2E;--border-brown:#8B7355;--line:rgba(43,33,24,.18);--line-strong:rgba(43,33,24,.38);--panel-bg:rgba(239,225,192,0.55);
+font-family:"EB Garamond",Georgia,serif;background:var(--parchment);color:var(--ink);border-radius:8px;overflow:hidden;font-size:16px;line-height:1.6}
+.mv-wrap::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cg fill='none' stroke='%232B2118' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M10,40 C40,30 55,10 70,-5'/%3E%3Cpath d='M28,32 C34,20 30,8 36,-2'/%3E%3Cpath d='M42,26 C50,18 48,6 56,0'/%3E%3Cellipse cx='34' cy='19' rx='7' ry='3.2' transform='rotate(-35 34 19)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='50' cy='12' rx='6' ry='2.8' transform='rotate(-25 50 12)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='20' cy='30' rx='6' ry='2.6' transform='rotate(-50 20 30)' fill='%232B2118' opacity='0.85'/%3E%3Cpath d='M300,120 C280,140 275,165 285,190'/%3E%3Cpath d='M288,132 C282,142 286,152 280,160'/%3E%3Cellipse cx='284' cy='140' rx='6.5' ry='3' transform='rotate(60 284 140)' fill='%232B2118' opacity='0.85'/%3E%3Cellipse cx='278' cy='158' rx='6' ry='2.7' transform='rotate(70 278 158)' fill='%232B2118' opacity='0.85'/%3E%3Cpath d='M150,300 C160,280 158,262 170,248'/%3E%3Cellipse cx='163' cy='274' rx='6' ry='2.8' transform='rotate(-40 163 274)' fill='%232B2118' opacity='0.8'/%3E%3Cellipse cx='172' cy='256' rx='5.5' ry='2.5' transform='rotate(-30 172 256)' fill='%232B2118' opacity='0.8'/%3E%3Cpath d='M0,250 C15,240 22,225 18,208'/%3E%3Cellipse cx='12' cy='230' rx='5.5' ry='2.5' transform='rotate(20 12 230)' fill='%232B2118' opacity='0.8'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat;background-size:200px 200px;opacity:0.18;pointer-events:none}
+.mv-header,.mv-article-wrap{position:relative;z-index:1}
+.mv-header{z-index:5}
+.mv-header{border-bottom:3px double var(--border-brown);padding:18px 24px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.mv-brand{font-family:"Pinyon Script",cursive;font-weight:400;font-size:2.3rem;letter-spacing:.01em;color:var(--ink);display:flex;align-items:center;gap:6px;text-decoration:none}
+.mv-candle-icon{width:32px;height:auto;flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.15));transform:rotate(240deg)}
+.mv-brand span{color:var(--rubric)}
+.mv-brand span.mv-avalon-word{position:relative;cursor:pointer;display:inline-block;color:#000}
+.mv-avalon-tip{position:absolute;top:calc(100% + 12px);left:0;transform:translateY(-6px);background:#ffffff;color:#000000;font-family:"EB Garamond",serif;font-style:normal;font-weight:400;font-size:.72rem;line-height:1.45;padding:10px 14px;border-radius:6px;border:1px solid rgba(43,33,24,.15);white-space:normal;width:230px;text-align:left;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:20}
+.mv-avalon-tip::after{content:"";position:absolute;bottom:100%;left:24px;border:6px solid transparent;border-bottom-color:#ffffff}
+.mv-avalon-word.mv-tip-active .mv-avalon-tip{opacity:1;pointer-events:auto;transform:translateY(0)}
+.mv-avalon-word:hover .mv-avalon-tip{opacity:1;pointer-events:auto;transform:translateY(0)}
+.mv-brand,.mv-brand:visited,.mv-brand:focus,.mv-brand:active{background:transparent;outline:none;-webkit-tap-highlight-color:transparent}
+.mv-nav{display:flex;gap:20px;font-family:"Cinzel",serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.mv-nav a{color:var(--ink-soft);text-decoration:none}
+.mv-nav a:hover{color:var(--rubric)}
+.mv-article-wrap{padding:36px 24px 48px}
+.mv-back{display:inline-block;font-family:"Cinzel",serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+.mv-back:hover{color:var(--rubric)}
+.mv-article-meta{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.mv-article-date{font-family:"Cinzel",serif;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.mv-article-kind{display:inline-block;font-family:"Cinzel",serif;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rubric);border:1px solid var(--rubric);padding:2px 6px}
+.mv-article-title{font-family:"EB Garamond",serif;font-weight:600;font-style:italic;font-size:2rem;line-height:1.2;margin:0 0 24px;max-width:20ch}
+.mv-article p{max-width:62ch;color:var(--ink);font-size:1.02rem;margin:0 0 20px;line-height:1.75}
+.mv-article p:first-of-type::first-letter{font-family:"Cinzel Decorative",serif;font-weight:700;font-size:3.1rem;float:left;line-height:0.8;padding:4px 10px 0 0;color:var(--rubric)}
+.mv-divider{width:60px;height:1px;background:var(--line-strong);margin:32px 0}
+.mv-sign{font-family:"EB Garamond",serif;font-style:italic;color:var(--ink-soft);font-size:.9rem}
+.mv-loading{text-align:center;padding:48px;color:var(--ink-soft);font-style:italic}
+.mv-spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--rubric);border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mv-error{text-align:center;padding:48px;color:var(--rubric);font-style:italic}
+</style>
+</head>
+<body>
+<div class="mv-page-frame">
+<div class="mv-wrap">
+  <div class="mv-header">
+    <a class="mv-brand" href="index.html">
+      <img class="mv-candle-icon" src="data:image/png;base64,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" alt="">
+      <span class="mv-avalon-word">Avalon<span class="mv-avalon-tip">The mythical isle of Arthurian legend, where Excalibur was forged and where Arthur was taken to heal.</span></span> <span>Chronicles</span>
+    </a>
+    <div class="mv-nav"><a href="index.html">Home</a><a href="blogs.html">Blogs</a><a href="about.html">About Me</a></div>
+  </div>
+  <div class="mv-article-wrap" id="articleWrap">
+    <div class="mv-loading"><span class="mv-spinner"></span>Loading chronicle…</div>
+  </div>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+(function() {
+  'use strict';
+  firebase.initializeApp({
+    apiKey: "AIzaSyCRcKI8WNSvo_v1Em7p93FwV8vATMQUIBI",
+    authDomain: "aysesite2.firebaseapp.com",
+    projectId: "aysesite2",
+    storageBucket: "aysesite2.firebasestorage.app",
+    messagingSenderId: "254142189527",
+    appId: "1:254142189527:web:98397320ede7cb52b84592"
+  });
+  var db = firebase.firestore();
+  var wrap = document.getElementById('articleWrap');
+
+  // Get slug from URL
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('slug');
+
+  if (!slug) {
+    wrap.innerHTML = '<div class="mv-error">No chronicle specified. <a href="blogs.html" style="color:var(--rubric)">Return to the index →</a></div>';
+    return;
+  }
+
+  // Load blog by slug
+  db.collection('blogs').where('slug', '==', slug).limit(1).get().then(function(snapshot) {
+    if (snapshot.empty) {
+      wrap.innerHTML = '<div class="mv-error">Chronicle not found. <a href="blogs.html" style="color:var(--rubric)">Return to the index →</a></div>';
+      return;
+    }
+
+    var doc = snapshot.docs[0];
+    var d = doc.data();
+
+    // Update page title
+    document.title = esc(d.title) + ' — Avalon Chronicles';
+
+    // Set html lang
+    if (d.lang) document.documentElement.lang = d.lang;
+
+    // Build article HTML
+    var html = '';
+    html += '<a class="mv-back" href="blogs.html">← Back to the Chronicle</a>';
+    html += '<div class="mv-article-meta">';
+    html += '<span class="mv-article-date">' + esc(d.date) + '</span>';
+    html += '<span class="mv-article-kind">' + esc(d.kind) + '</span>';
+    html += '</div>';
+    html += '<h1 class="mv-article-title">' + esc(d.title) + '</h1>';
+    html += '<div class="mv-article">';
+
+    // Split content by double newlines into paragraphs
+    var paragraphs = (d.content || '').split(/\n\n+/);
+    paragraphs.forEach(function(p) {
+      p = p.trim();
+      if (p) html += '<p>' + esc(p) + '</p>';
+    });
+
+    html += '</div>';
+
+    if (d.sign) {
+      html += '<div class="mv-divider"></div>';
+      html += '<p class="mv-sign">' + esc(d.sign) + '</p>';
+    }
+
+    wrap.innerHTML = html;
+  }).catch(function(err) {
+    wrap.innerHTML = '<div class="mv-error">Error loading chronicle: ' + esc(err.message) + '</div>';
+  });
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  // Avalon tooltip
+  document.querySelectorAll('.mv-avalon-word').forEach(function(w) {
+    w.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      w.classList.toggle('mv-tip-active');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.mv-avalon-word.mv-tip-active').forEach(function(w) { w.classList.remove('mv-tip-active'); });
+  });
+})();
+</script>
+</body>
+</html>
