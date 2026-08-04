@@ -114,7 +114,7 @@ font-family:"EB Garamond",Georgia,serif;background:var(--parchment);color:var(--
     var paragraphs = (d.content || '').split(/\n\n+/);
     paragraphs.forEach(function(p) {
       p = p.trim();
-      if (p) html += '<p>' + esc(p) + '</p>';
+      if (p) html += '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>';
     });
 
     html += '</div>';
