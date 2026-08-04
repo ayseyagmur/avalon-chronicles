@@ -1,6 +1,6 @@
 # Avalon Chronicles 🏰
 
-A personal blog with a medieval manuscript aesthetic — parchment textures, illuminated first letters, and a hand-drawn willow tree. Built with plain HTML/CSS/JS and Firebase (Firestore) for content, deployed on Netlify.
+A personal blog with a medieval manuscript aesthetic — parchment textures, illuminated first letters that is built with plain HTML/CSS/JS and Firebase (Firestore) for content, deployed on Netlify.
 
 ## Pages
 
