@@ -30,8 +30,12 @@ font-family:"EB Garamond",Georgia,serif;background:var(--parchment);color:var(--
 body.mv-lang-tr .lang-en{display:none}
 body.mv-lang-tr .lang-tr{display:inline}
 .mv-body-wrap{padding:44px 24px 52px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.mv-about-photo-frame{width:320px;max-width:80%;box-shadow:0 6px 20px rgba(43,33,24,.25);margin-bottom:26px}
-.mv-about-photo-frame img{display:block;width:100%;height:auto}
+.mv-carousel{position:relative;width:320px;max-width:80%;overflow:hidden;box-shadow:0 6px 20px rgba(43,33,24,.25);margin-bottom:26px}
+.mv-track{display:flex;transition:transform .5s ease}
+.mv-track img{flex:0 0 100%;width:100%;display:block;aspect-ratio:1/1;object-fit:cover;cursor:pointer}
+.mv-arrow{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--border-brown);background:rgba(239,225,192,.85);color:var(--ink);font-size:1.2rem;line-height:1;cursor:pointer}
+.mv-arrow:hover{color:var(--rubric);border-color:var(--rubric)}
+.mv-prev{left:8px}.mv-next{right:8px}
 .mv-eyebrow{font-family:"Cinzel",serif;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rubric);margin:0 0 10px}
 .mv-about-name{font-family:"Pinyon Script",cursive;font-weight:400;font-size:2.6rem;margin:0 0 20px;color:var(--ink)}
 .mv-about-bio{max-width:52ch;color:var(--ink);font-size:1rem;line-height:1.75;text-align:left}
@@ -54,8 +58,14 @@ body.mv-lang-tr .lang-tr{display:inline}
     <div class="mv-nav"><a href="index.html">Home</a><a href="blogs.html">Blogs</a><a href="about.html" class="mv-active">About Me</a></div>
   </div>
   <div class="mv-body-wrap">
-<div class="mv-about-photo-frame">
-    <img src="./SAM_0669.jpg" alt="My photo">
+<div class="mv-carousel">
+  <div class="mv-track">
+    <img src="./SAM_0669.jpg" alt="Photo 1">
+    <img src="./ayna.jpg" alt="Photo 2">
+    <img src="./selfie.jpg" alt="Photo 3">
+  </div>
+  <button class="mv-arrow mv-prev" aria-label="Önceki">‹</button>
+  <button class="mv-arrow mv-next" aria-label="Sonraki">›</button>
 </div>
     <p class="mv-about-name" style="color:var(--rubric)">Hi, I am Yağmur!</p>
     <div class="mv-divider" style="margin-top:0"></div>
@@ -99,6 +109,14 @@ body.mv-lang-tr .lang-tr{display:inline}
     document.body.classList.toggle('mv-lang-tr', isTr);
     btn.textContent = isTr ? 'English' : 'Turkish';
   });
+})();
+(function(){
+  var c=document.querySelector('.mv-carousel');if(!c)return;
+  var t=c.querySelector('.mv-track'),n=t.children.length,i=0;
+  function go(d){i=(i+d+n)%n;t.style.transform='translateX(-'+i*100+'%)';}
+  c.querySelector('.mv-prev').onclick=function(){go(-1)};
+  c.querySelector('.mv-next').onclick=function(){go(1)};
+  t.onclick=function(){go(1)};
 })();
 </script>
 </body>
